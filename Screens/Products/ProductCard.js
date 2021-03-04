@@ -8,7 +8,7 @@ const ProductCard = (props) => {
         <View style={styles.container}>
             <Image 
                 style={styles.image}
-                resizeMethod='contain'
+                resizeMod='contain'
                 source={{uri: props.colorProducts[0].images[0]}}
             />
             <View style={styles.card}/>
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         height: width/2 - 20 - 30
     },
     card: {
-        marginBottom: 10,
+        marginBottom: 5,
         height: width/20 - 20 -90,
         backgroundColor: 'transparent',
         width: width/2 - 20 - 10
