@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Dimensions } from 'react-native';
+import { View, StyleSheet, Dimensions } from 'react-native';
 import ProductCard from './ProductCard'; 
 
 var { width, height } = Dimensions.get("window");
@@ -9,12 +9,13 @@ const ProductList = (props) => {
     const {item} = props;
 
     return (
-        <TouchableOpacity style={{ width: '50%'}}>
-            <View style={{ width: width/2, backgroundColor: 'gainsboro'}}>
-                <ProductCard {...item}/>
-            </View>
-        </TouchableOpacity>
+        <View style={{ 
+                       backgroundColor: 'gainsboro',
+                    }}>
+            <ProductCard {...item}/>
+        </View>
     )
 }
+
 
 export default ProductList;

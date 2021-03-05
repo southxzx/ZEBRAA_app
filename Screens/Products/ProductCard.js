@@ -1,44 +1,45 @@
 import React from 'react';
-import { StyleSheet, View, Dimensions, Image, Text, Button } from 'react-native';
+import { StyleSheet, View, Dimensions, Image, Text, Button, TouchableOpacity } from 'react-native';
 
 var { width } = Dimensions.get("window");
 
 const ProductCard = (props) => {
     return (
-        <View style={styles.container}>
-            <Image 
-                style={styles.image}
-                resizeMod='contain'
-                source={{uri: props.colorProducts[0].images[0]}}
-            />
-            <View style={styles.card}/>
-            <Text style={styles.title}>
-                {props.name.length > 15 ? props.name.substring(0,15-3) + '...'
-                : props.name}
-            </Text>
-            <Text style={styles.price}>${props.colorProducts[0].price}</Text>
-            <View style={{marginBottom: 60}}>
-                <Button title={'Add'} color={'green'}/>
+        <TouchableOpacity>
+            <View style={styles.container}>
+                <Image
+                    style={styles.image}
+                    resizeMod='contain'
+                    source={{ uri: props.colorProducts[0].images[0] }}
+                />
+                <View style={styles.card} />
+                <Text style={styles.title}>
+                    {props.name.length > 15 ? props.name.substring(0, 15 - 3) + '...'
+                        : props.name}
+                </Text>
+                <Text style={styles.price}>${props.colorProducts[0].price}</Text>
+                <View style={{marginBottom: 60}}>
+                    <Button title={'Add to cart'} color={'green'} />
+                </View>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        width: width/2 - 20,
+        width: width/2 - 15,
         height: width/1.4,
         padding: 10,
+        marginHorizontal: 5,
         borderRadius: 10,
-        marginTop: 25,
-        marginBottom: 5,
-        marginLeft: 10,
         alignItems: "center",
         elevation: 8,
         backgroundColor: "white",
+        marginVertical: 5,
     },
     image: {
-        width: width/2 - 20 - 10,
+        width: width/2 - 20 - 15,
         height: width/2 - 20 - 30
     },
     card: {
@@ -55,6 +56,12 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: 'orange',
         marginTop: 10
+    },
+    button: {
+        marginBottom: 60,
+        backgroundColor: 'green',
+        color: 'white',
+        borderRadius: 10,
     }
 })
 

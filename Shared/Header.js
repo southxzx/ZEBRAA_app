@@ -7,12 +7,11 @@ const Header = () => {
             <Image 
                 source={require('../assets/logo-nike.png')}
                 resizeMod='contain'
-                style={{height: 40, width: 100}}
+                style={{height: 30, width: 80}}
             />
         </SafeAreaView>
     )
 }
-
 const styles = StyleSheet.create({
     header: {
         width: '100%',
