@@ -10,7 +10,7 @@ import CategoryFilter from './CategoryFilter';
 
 var { height } = Dimensions.get('window');
 
-const ProductContainer = () => {
+const ProductContainer = (props) => {
 
     const [products,setProducts] = useState();
     const [productsFilter,setProductsFilter] = useState([]);
@@ -99,6 +99,7 @@ const ProductContainer = () => {
             {focus == true ? (
                 <SearchedProduct
                     productsFilter={productsFilter}
+                    navigation={props.navigation}
                 />
             ) : (
             <ScrollView>
@@ -121,6 +122,7 @@ const ProductContainer = () => {
                                 <ProductList
                                     key={item._id}
                                     item={item}
+                                    navigation={props.navigation}
                                 />
                             )
                         })}

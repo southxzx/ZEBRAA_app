@@ -5,7 +5,9 @@ var { width } = Dimensions.get("window");
 
 const ProductCard = (props) => {
     return (
-        <TouchableOpacity>
+        <TouchableOpacity
+            onPress={() => props.navigation.navigate("Product Detail",{item: props})}
+        >
             <View style={styles.container}>
                 <Image
                     style={styles.image}
