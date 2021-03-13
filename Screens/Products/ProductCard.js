@@ -1,5 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, Dimensions, Image, Text, Button, TouchableOpacity } from 'react-native';
+import Toast from 'react-native-toast-message';
+import { connect } from 'react-redux';
+import * as actions from '../../Redux/Actions/cartActions';
 
 var { width } = Dimensions.get("window");
 
@@ -21,11 +24,31 @@ const ProductCard = (props) => {
                 </Text>
                 <Text style={styles.price}>${props.colorProducts[0].price}</Text>
                 <View style={{marginBottom: 60}}>
-                    <Button title={'Add to cart'} color={'green'} />
+                    <Button 
+                        title={'Add to cart'} 
+                        color={'green'} 
+                        onPress={() => {
+                            props.addItemToCart(props),
+                            Toast.show({
+                                topOffset: 60,
+                                type: "success",
+                                text1: `${props.name} added to Cart`,
+                                text2: "Go to your cart to complete order"
+                            })
+                        }}
+                    />
                 </View>
             </View>
         </TouchableOpacity>
     )
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addItemToCart: (product) => {
+            dispatch(actions.addToCart({quantity: 1, product}))
+        }
+    }
 }
 
 const styles = StyleSheet.create({
@@ -67,4 +90,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default ProductCard;
+export default connect(null, mapDispatchToProps)(ProductCard);
