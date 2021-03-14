@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import Cart from '../Screens/Carts/Cart';
+import CheckoutNavigator from './CheckoutNavigator';
 
 const Stack = createStackNavigator();
 
@@ -14,6 +15,14 @@ function MyStack() {
                     headerShown: false
                 }}
             />
+            <Stack.Screen
+                name="Checkout"
+                component={CheckoutNavigator}
+                options={{
+                    headerShown: false
+                }}
+            />
+
         </Stack.Navigator>
     )
 }

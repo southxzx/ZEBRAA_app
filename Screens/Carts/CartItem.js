@@ -4,7 +4,6 @@ import { Text, Left, Right, ListItem, Thumbnail, Body } from 'native-base';
 
 const CartItem = (props) => {
     const item = props.item.item;
-    console.log(item);
     const [quantity, setQuantity] = useState(1);
 
     return (
