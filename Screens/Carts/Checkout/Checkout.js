@@ -20,8 +20,6 @@ const Checkout = (props) => {
     const [country, setCountry] = useState();
     const [phone, setPhone] = useState();
 
-    console.log(countries);
-
     useEffect(() => {
         setOrderItems(props.cartItem);
         return () => {
