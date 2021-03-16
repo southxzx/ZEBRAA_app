@@ -1,12 +1,15 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ActivityIndicator, FlatList, ScrollView, Dimensions } from 'react-native';
+import React, { useState, useCallback } from 'react';
+import { View, StyleSheet, ActivityIndicator, ScrollView, Dimensions } from 'react-native';
 import { Container, Header, Icon, Input, Item, Text } from 'native-base';
+import { useFocusEffect } from '@react-navigation/native';
 
 import ProductList from './ProductList';
 import SearchedProduct from './SearchedProduct';
 import Banner from '../../Shared/Banner';
 import CategoryFilter from './CategoryFilter';
+
+import baseURL from '../../assets/common/baseURL';
 
 var { height } = Dimensions.get('window');
 
@@ -18,44 +21,51 @@ const ProductContainer = (props) => {
     const [categories, setCategories] = useState();
     const [productsCtg, setProductsCtg] = useState([]);
     const [active, setActive] = useState();
-    const [initialState, setInitialState] = useState()
+    const [initialState, setInitialState] = useState();
+    const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-
-        setFocus(false);
-        setActive(-1);
-
-        const FetchCategories = async () => {
-            const cate = await axios.get('https://tinhyeumaunang.herokuapp.com/api/category/get');
-            setCategories(cate.data);
-        }
-    
-        const FetchProduct = async () => {
-            const data = await axios.post('https://tinhyeumaunang.herokuapp.com/api/product/getAll',{
-                limit: 8,
-                skip: 0,
-                filters:{ 
-                    // category: ['5fe69f5270075d277c752092']
+    useFocusEffect((
+        useCallback(
+            () => {
+                setFocus(false);
+                setActive(-1);
+        
+                const FetchCategories = async () => {
+                    const cate = await axios.get(`${baseURL}category/get`);
+                    setCategories(cate.data);
                 }
-            })
-            setProducts(data.data.data); 
-            setProductsFilter(data.data.data); // For Search product
-            setInitialState(data.data.data);
-            setProductsCtg(data.data.data);
-        }
+            
+                const FetchProduct = async () => {
+                    const data = await axios.post(`${baseURL}product/getAll`,{
+                        limit: 8,
+                        skip: 0,
+                        filters:{ 
+                            // category: ['5fe69f5270075d277c752092']
+                        }
+                    })
+                    setProducts(data.data.data); 
+                    setProductsFilter(data.data.data); // For Search product
+                    setInitialState(data.data.data);
+                    setProductsCtg(data.data.data);
+                    setLoading(false);
+                }
+        
+                FetchProduct();
+                FetchCategories();
+        
+                return () => {
+                    setProducts([]);
+                    setProductsFilter([]);
+                    setFocus();
+                    setCategories([]);
+                    setActive();
+                    setInitialState();
+                }
+            },
+        [],
+    ))
+    )
 
-        FetchProduct();
-        FetchCategories();
-
-        return () => {
-            setProducts([]);
-            setProductsFilter([]);
-            setFocus();
-            setCategories([]);
-            setActive();
-            setInitialState();
-        }
-    }, [])
 
     const searchProduct = (text) => {
         setProductsFilter(
@@ -82,7 +92,9 @@ const ProductContainer = (props) => {
     }
 
     return (
-        <Container>
+        <>
+        {loading == false ? (
+            <Container>
             <Header searchBar rounded >
                 <Item>
                     <Icon name="ios-search"/>
@@ -135,6 +147,16 @@ const ProductContainer = (props) => {
             </ScrollView>
             )}
         </Container>
+        ) : (
+            // loading
+            <Container style={[styles.center, { backgroundColor: '#f2f2f2', height: height}]}>
+                <ActivityIndicator
+                    size="large"
+                    color="red"
+                />
+            </Container>
+        )}
+    </>
     )
 }
 const styles = StyleSheet.create({
@@ -154,7 +176,7 @@ const styles = StyleSheet.create({
       },
       center: {
           justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
       }
 })
 
