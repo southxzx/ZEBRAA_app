@@ -3,12 +3,13 @@ import { View, Text, StyleSheet, Button } from 'react-native';
 import Error from '../../Shared/Error';
 import FormContainer from '../../Shared/Form/FormContainer'
 import Input from '../../Shared/Form/Input';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import Toast from 'react-native-toast-message';
 
 const Register = (props) => {
 
     const [email, setEmail] = useState('');
-    const [name, SetName] = useState('');
+    const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -16,10 +17,27 @@ const Register = (props) => {
     const register = () => {
         if (
             email === '' || 
-            name === '' || 
+            name === '' ||   
             phone === '' ||
             password === ''){
                 setError('Please fill in the form correctly!')
+        }
+        else{
+            let user = {
+                name,
+                email,
+                phone,
+                password,
+                isAdmin: false
+            }
+            Toast.show({
+                topOffset: 60,
+                type: "success",
+                text1: "Registration Succeeded",
+                text2: "Please login into your account"
+            })
+            props.navigation.navigate("Login");
+            // Failed case
         }
     }
 
