@@ -10,6 +10,26 @@ import ListItem from './ListItem';
 
 var { height, width } = Dimensions.get("window");
 
+const ListHeader = () => {
+    return (
+        <View
+            elevation={1}
+            style={styles.listHeader}
+        >
+            <View style={styles.headerItem}></View>
+            <View style={styles.headerItem1}>
+                <Text style={{ fontWeight: 'bold' }}>Name</Text>
+            </View>
+            <View style={styles.headerItem}>
+                <Text style={{ fontWeight: 'bold' }}>Cate</Text>
+            </View>
+            <View>
+                <Text style={[styles.headerItem2, { fontWeight: 'bold'}]}>Price</Text>
+            </View>
+        </View>
+    )
+}
+
 const Products = (props) => {
 
     const [productList, setProductList] = useState();
@@ -48,6 +68,15 @@ const Products = (props) => {
         )
     )
 
+    const searchProduct = (text) => {
+        if (text == ""){
+            setProductsFilter(productList);
+        }
+        setProductsFilter(
+            productList.filter((i) => i.name.toLowerCase().includes(text.toLowerCase()))
+        )
+    }
+
     return (
         <View>
             <View>
@@ -56,18 +85,19 @@ const Products = (props) => {
                         <Icon name="search"/>
                         <Input
                             placeholder={"Search"}
-                            //onChange
+                            onChangeText={(text) => searchProduct(text)}
                         />
                     </Item>
                 </Header>
             </View>
             {loading ? (
-                <View>
+                <View style={styles.spinner}>
                     <ActivityIndicator size="large" color="red"/>
                 </View>
             ) : (
                 <FlatList
                     data={productFilter}
+                    ListHeaderComponent={ListHeader}
                     renderItem={({item, index}) => (
                         <ListItem
                             {...item}
@@ -81,5 +111,31 @@ const Products = (props) => {
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    listHeader: {
+        flexDirection: 'row',
+        padding: 10,
+        backgroundColor: 'gainsboro',
+    },
+    headerItem: {
+        margin: 3,
+        width: width / 6
+    },
+    headerItem1: {
+        margin: 3,
+        width: width / 3
+    },
+    headerItem2: {
+        textAlign: 'right',
+        margin: 3,
+        width: width / 5
+    },
+    spinner: {
+        height: height / 2,
+        alignItems: 'center',
+        justifyContent: 'center',
+    }
+})
 
 export default Products;
