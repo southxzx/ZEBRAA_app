@@ -20,7 +20,7 @@ const Confirm = (props) => {
     return (
         <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.titleContainer}>
-                <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Confirm Order</Text>
+               <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Confirm Order</Text>
             </View>
             {props.route.params ? (
                 <View style={{ borderWidth: 2, borderColor: 'orange', width: width/1.1}}>
@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
         height: height,
         padding: 8,
         alignItems: 'center',
-        justifyContent: 'center',
         backgroundColor: 'white', 
     },
     titleContainer: {

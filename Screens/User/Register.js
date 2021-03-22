@@ -97,6 +97,7 @@ const Register = (props) => {
                     </EasyButton>
                 </View>
             </FormContainer>
+            
         </KeyboardAwareScrollView>
     )
 }

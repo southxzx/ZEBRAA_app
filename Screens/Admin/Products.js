@@ -7,6 +7,7 @@ import axios from 'axios';
 import baseURL from '../../assets/common/baseURL';
 import AsyncStorage from '@react-native-community/async-storage';
 import ListItem from './ListItem';
+import EasyButton from '../../Shared/StyledComponents/EasyButton';
 
 var { height, width } = Dimensions.get("window");
 
@@ -24,7 +25,7 @@ const ListHeader = () => {
                 <Text style={{ fontWeight: 'bold' }}>Cate</Text>
             </View>
             <View>
-                <Text style={[styles.headerItem2, { fontWeight: 'bold'}]}>Price</Text>
+                <Text style={[styles.headerItem2, { fontWeight: 'bold' }]}>Price</Text>
             </View>
         </View>
     )
@@ -49,14 +50,14 @@ const Products = (props) => {
                     .catch((err) => console.log(err))
                 // Call api
                 axios
-                .post(`${baseURL}product/getAll`)
-                .then((res) => {
-                    // console.log(res.data.data);
-                    setProductList(res.data.data);
-                    setProductsFilter(res.data.data);
-                    setLoading(false);
-                })
-                .catch((err) => console.log(err));
+                    .post(`${baseURL}product/getAll`)
+                    .then((res) => {
+                        // console.log(res.data.data);
+                        setProductList(res.data.data);
+                        setProductsFilter(res.data.data);
+                        setLoading(false);
+                    })
+                    .catch((err) => console.log(err));
 
                 return () => {
                     setProductList();
@@ -69,7 +70,7 @@ const Products = (props) => {
     )
 
     const searchProduct = (text) => {
-        if (text == ""){
+        if (text == "") {
             setProductsFilter(productList);
         }
         setProductsFilter(
@@ -78,11 +79,37 @@ const Products = (props) => {
     }
 
     return (
-        <View>
+        <View style={styles.container}>
+            <View style={styles.buttonContainer}>
+                <EasyButton
+                    secondary
+                    medium
+                    onPress={() => props.navigation.navigate("Orders")}
+                >
+                    <Icon name="shopping-bag" size={18} color="white" />
+                    <Text style={styles.buttonText}>Orders</Text>
+                </EasyButton>
+                <EasyButton
+                    secondary
+                    medium
+                    onPress={() => props.navigation.navigate("ProductForm")}
+                >
+                    <Icon name="plus" size={18} color="white" />
+                    <Text style={styles.buttonText}>Products</Text>
+                </EasyButton>
+                <EasyButton
+                    secondary
+                    medium
+                    onPress={() => props.navigation.navigate("Categories")}
+                >
+                    <Icon name="plus" size={18} color="white" />
+                    <Text style={styles.buttonText}>Category</Text>
+                </EasyButton>
+            </View>
             <View>
                 <Header searchBar rounded>
-                    <Item style={{ padding: 5}}>
-                        <Icon name="search"/>
+                    <Item style={{ padding: 5 }}>
+                        <Icon name="search" />
                         <Input
                             placeholder={"Search"}
                             onChangeText={(text) => searchProduct(text)}
@@ -92,13 +119,13 @@ const Products = (props) => {
             </View>
             {loading ? (
                 <View style={styles.spinner}>
-                    <ActivityIndicator size="large" color="red"/>
+                    <ActivityIndicator size="large" color="red" />
                 </View>
             ) : (
                 <FlatList
                     data={productFilter}
                     ListHeaderComponent={ListHeader}
-                    renderItem={({item, index}) => (
+                    renderItem={({ item, index }) => (
                         <ListItem
                             {...item}
                             navigation={props.navigation}
@@ -135,7 +162,20 @@ const styles = StyleSheet.create({
         height: height / 2,
         alignItems: 'center',
         justifyContent: 'center',
-    }
+    },
+    buttonText: {
+        marginLeft: 4,
+        color: 'white'
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        alignSelf: 'center',
+        margin: 10,
+    },
+    container: {
+        marginBottom: 160,
+        backgroundColor: 'white'
+    },
 })
 
 export default Products;

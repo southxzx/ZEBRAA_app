@@ -52,7 +52,7 @@ const Checkout = (props) => {
                     placeholder={"Phone"}
                     name={"phone"}
                     value={phone}
-                    keyboardType={"numeric"}
+                    // keyboardType={"numeric"}
                     onChangeText={(text) => setPhone(text)}
                 />
                 <Input
