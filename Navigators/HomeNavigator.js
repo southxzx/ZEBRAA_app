@@ -20,7 +20,7 @@ function MyStack() {
                 name="Product Detail"
                 component={SingleProduct}
                 options={{
-                    headerShown: false
+                    headerShown: true
                 }}
             />
         </Stack.Navigator>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Button, StyleSheet, Text, Image, TouchableOpacity, TouchableHighlight, Dimensions, Modal } from 'react-native';
 import  Icon from 'react-native-vector-icons/FontAwesome';
+import EasyButton from '../../Shared/StyledComponents/EasyButton';
 
 var { width, height } = Dimensions.get("window");
 
@@ -32,14 +33,34 @@ const ListItem = (props) => {
                         >
                             <Icon name="close" size={20}/>
                         </TouchableHighlight>
-                        <Button title="Edit" onPress={() => [
+                        {/* <Button title="Edit" onPress={() => [
                             props.navigation.navigate("ProductForm"),
                             setModalVisible(false)
-                        ]}/>
-                        <Button title="Delete" onPress={() => [
+                        ]}/> */}
+                        <EasyButton 
+                            medium 
+                            secondary
+                            onPress={() => [
+                                props.navigation.navigate("ProductForm"),
+                                setModalVisible(false)
+                            ]}
+                        >
+                            <Text style={styles.textStyle}>Edit</Text>
+                        </EasyButton>
+                        <EasyButton 
+                            medium 
+                            danger
+                            onPress={() => [
+                                // Delete function here
+                                setModalVisible(false)
+                            ]}
+                        >
+                            <Text style={styles.textStyle}>Delete</Text>
+                        </EasyButton>
+                        {/* <Button title="Delete" onPress={() => [
                             // Delete function here
                             setModalVisible(false)
-                        ]}/>
+                        ]}/> */}
                     </View>
                 </View>
             </Modal>
@@ -115,6 +136,10 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5
+    },
+    textStyle: {
+        color: 'white',
+        fontWeight: 'bold',
     }
 })
 
