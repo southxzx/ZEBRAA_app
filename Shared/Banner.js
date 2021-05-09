@@ -26,7 +26,7 @@ const Banner = () => {
                         style={{ height: width / 2 - 10 }}
                         showsButtons={false}
                         autoplay={true}
-                        autoplayTimeout={2}
+                        autoplayTimeout={5}
                     >
                         {bannerData.map((item) => {
                             return (
@@ -49,7 +49,7 @@ const Banner = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'gainsboro'
+        backgroundColor: '#fff8f0'
     },
     swiper: {
         width: width,
@@ -58,10 +58,11 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
     iamgeBanner: {
-        height: width/2,
+        height: width/2 - 10,
         width: width-20,
         borderRadius: 20,
-        marginHorizontal: 10
+        marginHorizontal: 10,
+        marginVertical: 10,
     }
 })
 

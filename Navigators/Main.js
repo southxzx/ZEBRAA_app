@@ -12,6 +12,7 @@ import AdminNavigator from './AdminNavigator';
 //
 import CartIcon from '../Shared/CartIcon';
 import AuthGlobal from '../Context/store/AuthGlobal';
+import MyTabBar from './MyTabBar';
 
 
 const Tab = createBottomTabNavigator();
@@ -21,12 +22,13 @@ const Main = () => {
     const context = useContext(AuthGlobal);
     return (
         <Tab.Navigator
-            initialRouteName="Home"
-            tabBarOptions={{
-                keyboardHidesTabBar: true,
-                showLabel: false,
-                activeTintColor: '#391e63'
-            }}
+            // initialRouteName="Home"
+            // tabBarOptions={{
+            //     keyboardHidesTabBar: true,
+            //     showLabel: false,
+            //     activeTintColor: '#391e63'
+            // }}
+            tabBar={props => <MyTabBar {...props}/>}
         >
             <Tab.Screen
                 name="Home"
@@ -59,7 +61,6 @@ const Main = () => {
                 }}
             />
             {
-                // optional chaining es2020 -  akira D
                 context.stateUser.userProfile?.role === 'admin' ? (
                     <Tab.Screen
                         name="Admin"
