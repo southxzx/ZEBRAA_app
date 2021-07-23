@@ -6,15 +6,17 @@ This app contains some basic functionality of an e-shopping app, of course there
 
 ## Technologies using:
 
-React Native
+React Native \n
 In server: RestApi form NodeJs + ExpressJS
 
 ## How to install?:
 
 Clone it to your local computer.
+```
 *npm i* Download all the dependencies from package.json
 *expo start* Run app via Expo 
 *Scan the QR code with your Expo app on your phone* (available on both AppStore & GooglePlay)
+```
 
 ## Contact me:
 
