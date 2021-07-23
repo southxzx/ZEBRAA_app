@@ -1,25 +1,27 @@
-import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import React, { useMemo } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { useTheme } from '../Context/store/ThemeContext';
+import TextCustom from './StyledComponents/TextCustom';
 
-const Error = (props) => {
-    return (
-        <View style={styles.container}>
-            <Text style={styles.text}>
-                {props.message}
-            </Text>
-        </View>
-    )
+const Error = ({ message }) => {
+  const { theme } = useTheme();
+  const Styles = useMemo(() => createStyles(theme));
+  return (
+    <View style={Styles.container}>
+      <TextCustom fontSize={12} color={theme.redError} style={{ alignSelf: 'center', marginBottom: 5,}}>
+        {message}
+      </TextCustom>
+    </View>
+  )
 }
-
-const styles = StyleSheet.create({
+const createStyles = (theme) => {
+  const styles = StyleSheet.create({
     container: {
-        width: '100%',
-        alignItems: 'center',
-        margin: 8,
+      width: '100%',
+      alignItems: 'center',
     },
-    text: {
-        color: 'red'
-    }
-})
+  });
+  return styles
+}
 
 export default Error;

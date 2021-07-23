@@ -6,11 +6,11 @@ var { width, height } = Dimensions.get("window");
 
 const ProductList = (props) => {
 
-  const { item } = props;
+  const { item, theme } = props;
 
   return (
     <View style={{
-      backgroundColor: '#fbfbfb',
+      backgroundColor: theme.backgroundPrimary,
     }}>
       <ProductCard {...item} navigation={props.navigation} />
     </View>

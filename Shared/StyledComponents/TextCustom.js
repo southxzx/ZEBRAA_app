@@ -21,9 +21,10 @@ import {
   Poppins_800ExtraBold_Italic,
   Poppins_900Black,
   Poppins_900Black_Italic
-} from '@expo-google-fonts/poppins'
+} from '@expo-google-fonts/poppins';
+import { useTheme } from '../../Context/store/ThemeContext';
 
-const TextCustom = ({ children, style, fontWeight = 300, fontStyle = 'Light', fontSize = 14, color = "black" }) => {
+const TextCustom = ({ children, style, fontWeight = 300, fontStyle = 'Light', fontSize = 14, color = "#292929" }) => {
 
   let [fontsLoaded] = useFonts({
     Poppins_100Thin,
@@ -45,6 +46,10 @@ const TextCustom = ({ children, style, fontWeight = 300, fontStyle = 'Light', fo
     Poppins_900Black,
     Poppins_900Black_Italic
   });
+  const { theme }  = useTheme();
+  if (color === '#292929'){
+    color = theme.darkTheme ? '#ffffff' : '#000000';
+  }
 
   if (!fontsLoaded) {
     return (

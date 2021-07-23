@@ -11,6 +11,7 @@ import store from './Redux/store';
 
 // Context api
 import Auth from './Context/store/Auth';
+import { Theme } from './Context/store/ThemeContext';
 
 //Navigators
 import Main from './Navigators/Main';
@@ -27,13 +28,15 @@ export default function App() {
 
   return (
     <Auth>
-      <Provider store={store}>
-        <NavigationContainer>
-          <Header />
-          <Main />
-          <Toast ref={(ref) => Toast.setRef(ref)} />
-        </NavigationContainer>
-      </Provider>
+      <Theme>
+        <Provider store={store}>
+          <NavigationContainer>
+            <Header />
+            <Main />
+            <Toast ref={(ref) => Toast.setRef(ref)} />
+          </NavigationContainer>
+        </Provider>
+      </Theme>
     </Auth>
   );
 }

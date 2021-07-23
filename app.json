@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "todo-list",
+    "name": "Zebraa",
     "slug": "todo-list",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -17,13 +17,21 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "buildNumber": "1.0.0",
+      "supportsTablet": true,
+      "bundleIdentifier": "host.exp.exponent",
+      "config": {
+        "googleSignIn": {
+          "reservedClientId": "com.googleusercontent.apps.631624789326-b615apsbnkil1l50ogm2mrbjn9kcvcsa"
+        }
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "host.exp.exponent"
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -1,36 +1,47 @@
-import React from 'react';
-import { TextInput, StyleSheet } from 'react-native';
+import React, { useMemo } from 'react';
+import { TextInput, StyleSheet, View } from 'react-native';
+import { useTheme } from '../../Context/store/ThemeContext';
+import TextCustom from '../StyledComponents/TextCustom';
 
-const Input = (props) => {
-    return (
-
-        <TextInput
-            style={styles.input}
-            placeholder={props.placeholder}
-            name={props.name}
-            id={props.id}
-            value={props.value}
-            autoCorrect={props.autoCorrect}
-            onChangeText={props.onChangeText}
-            onFocus={props.onFocus}
-            secureTextEntry={props.secureTextEntry}
-            keyboardType={props.keyboardType}
-        >
-        </TextInput>
-    )
+const Input = ({ name, id, value, autoCorrect, onChangeText, onFocus, secureTextEntry, keyboardType, onBlur, placeholder }) => {
+  const { theme } = useTheme();
+  const Styles = useMemo(() => createStyles(theme));
+  return (
+    <View style={Styles.container}>
+      <TextCustom fontSize={12} color={ theme.darkTheme ? "#FFF" : "#919191"} fontWeight={500} fontStyle="Medium" style={{width: '80%', alignSelf: 'center'}}>{placeholder}</TextCustom>
+      <TextInput
+        style={Styles.input}
+        // placeholder={props.placeholder}
+        name={name}
+        id={id}
+        value={value}
+        autoCorrect={autoCorrect}
+        onChangeText={onChangeText}
+        onFocus={onFocus}
+        secureTextEntry={secureTextEntry}
+        keyboardType={keyboardType}
+      />
+    </View>
+  )
 }
-
-const styles = StyleSheet.create({
+const createStyles = (theme) => {
+  const styles = StyleSheet.create({
+    container: {
+      width: '100%',
+      marginBottom: 2,
+      alignItems: 'center',
+    },
     input: {
-        width: '80%',
-        height: 60,
-        backgroundColor: 'white',
-        margin: 10,
-        borderRadius: 20,
-        padding: 10,
-        borderWidth: 2,
-        borderColor: 'orange'
+      color: theme.ink,
+      fontSize: 16,
+      width: '80%',
+      height: 40,
+      borderBottomWidth: 1,
+      borderColor: '#d7d7d7',
+      marginVertical: 5,
     }
-})
+  });
+  return styles
+}
 
 export default Input;

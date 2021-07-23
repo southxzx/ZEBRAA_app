@@ -13,54 +13,37 @@ import AdminNavigator from './AdminNavigator';
 import CartIcon from '../Shared/CartIcon';
 import AuthGlobal from '../Context/store/AuthGlobal';
 import MyTabBar from './MyTabBar';
+import SearchNavigator from './SearchNavigator';
 
 
 const Tab = createBottomTabNavigator();
 
 const Main = () => {
 
-    const context = useContext(AuthGlobal);
-    return (
-        <Tab.Navigator
-            // initialRouteName="Home"
-            // tabBarOptions={{
-            //     keyboardHidesTabBar: true,
-            //     showLabel: false,
-            //     activeTintColor: '#391e63'
-            // }}
-            tabBar={props => <MyTabBar {...props}/>}
-        >
-            <Tab.Screen
-                name="Home"
-                component={HomeNavigator}
-                options={{
-                    tabBarIcon: ({ color }) => (
-                        <Icon
-                            name='home'
-                            style={{ position: 'relative' }}
-                            color={color}
-                            size={35}
-                        />
-                    )
-                }}
-            />
-            <Tab.Screen
-                name="Cart"
-                component={CartNavigator}
-                options={{
-                    tabBarIcon: ({ color }) => (
-                        <View>
-                            <Icon
-                                name='shopping-cart'
-                                color={color}
-                                size={35}
-                            />
-                            <CartIcon />
-                        </View>
-                    )
-                }}
-            />
-            {
+  const context = useContext(AuthGlobal);
+  return (
+    <Tab.Navigator
+      // initialRouteName="Home"
+      // tabBarOptions={{
+      //     keyboardHidesTabBar: true,
+      //     showLabel: false,
+      //     activeTintColor: '#391e63'
+      // }}
+      tabBar={props => <MyTabBar {...props} />}
+    >
+      <Tab.Screen
+        name="Home"
+        component={HomeNavigator}
+      />
+      <Tab.Screen
+        name="Search"
+        component={SearchNavigator}
+      />
+      <Tab.Screen
+        name="Cart"
+        component={CartNavigator}
+      />
+      {/* {
                 context.stateUser.userProfile?.role === 'admin' ? (
                     <Tab.Screen
                         name="Admin"
@@ -75,23 +58,14 @@ const Main = () => {
                             )
                         }}
                     />
-                ) : null }
-            <Tab.Screen
-                name="User"
-                component={UserNavigator}
-                options={{
-                    tabBarIcon: ({ color }) => (
-                        <Icon
-                            name='user'
-                            color={color}
-                            size={35}
-                        />
-                    )
-                }}
-            />
-        </Tab.Navigator>
+                ) : null } */}
+      <Tab.Screen
+        name="User"
+        component={UserNavigator}
+      />
+    </Tab.Navigator>
 
-    )
+  )
 }
 
 export default Main;

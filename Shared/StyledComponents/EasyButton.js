@@ -2,12 +2,19 @@ import styled, { css } from 'styled-components';
 
 const EasyButton = styled.TouchableOpacity`
     flex-direction: row;
-    border-radius: 10px;
+    border-radius: 15px;
     padding: 10px;
-    margin: 10px;
-    align-self: flex-end;
+    align-self: center;
     justify-content: center;
+    align-items: center;
     background: transparent;
+
+    ${(props) =>
+      props.maxWidth &&
+      css`
+          width: 100%;
+      `
+    }
 
     ${(props) => 
         props.justIcon &&
@@ -20,17 +27,16 @@ const EasyButton = styled.TouchableOpacity`
             justify-content: flex-end;  
         `
     }
-
     ${(props) =>
         props.primary &&
         css`
-            background: #5cb85c;
+            background: #f48c06;
         ` 
     }
     ${(props) => 
         props.secondary && 
         css`
-            background: #62b1f6;
+            background: #54b175;
         `
     }
     ${(props) => 
@@ -42,7 +48,7 @@ const EasyButton = styled.TouchableOpacity`
     ${(props) => 
         props.large &&
         css`
-            width: 135px
+            width: 100%
         `
     }
     ${(props) => 

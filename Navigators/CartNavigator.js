@@ -19,7 +19,7 @@ function MyStack() {
                 name="Checkout"
                 component={CheckoutNavigator}
                 options={{
-                    headerShown: true
+                    headerShown: false
                 }}
             />
 
